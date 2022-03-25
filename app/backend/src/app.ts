@@ -5,8 +5,9 @@ class App {
   // ...
 
   constructor() {
-    // ...
+    this.app = express();
     this.config();
+    this.app.use(express.json());
     // ...
   }
 
@@ -24,7 +25,10 @@ class App {
 
   // ...
   public start(PORT: string | number):void {
-    // ...
+    this.app.listen(PORT, () =>{
+      console.log(`Listening on ${PORT}`);
+      
+    })
   }
 }
 

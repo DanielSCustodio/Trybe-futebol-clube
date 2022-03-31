@@ -1,4 +1,6 @@
+import cors = require('cors');
 import * as express from 'express';
+import loginRouter from './routers/loginRouter';
 
 class App {
   public app: express.Express;
@@ -6,8 +8,9 @@ class App {
 
   constructor() {
     this.app = express();
+    this.app.use(express.json()); // Mais de 1 hora travado por causa da ordem dessas linhas 🥲
+    this.app.use(cors());
     this.config();
-    this.app.use(express.json());
     // ...
   }
 
@@ -20,6 +23,7 @@ class App {
     };
 
     this.app.use(accessControl);
+    this.app.use('/login', loginRouter);
     // ...
   }
 

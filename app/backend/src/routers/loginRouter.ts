@@ -6,9 +6,16 @@ const login = Router();
 
 login.post(
   '/',
+  validationLogin.checkFields,
   validationLogin.checkEmail,
   validationLogin.checkPassword,
+  validationLogin.checkBodyLogin,
   loginController.login,
+);
+
+login.get(
+  '/validate',
+  loginController.validateLogin,
 );
 
 export default login;

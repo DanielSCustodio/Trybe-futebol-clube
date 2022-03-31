@@ -3,6 +3,33 @@ import * as bcrypt from 'bcryptjs';
 import sendResponse from '../util/responseError/responseError';
 import ResponseMessage from '../enum/ReponseForErros';
 import Users from '../database/models/Users';
+import schemaLogin from '../util/schemas/schemaLogin';
+
+const checkFields = async (req: Request, res: Response, next: NextFunction) => {
+  const { email, password } = await req.body;
+  if (!email || !password) { // Fazendo validação igual aos Incas e Astecas porque o Joi não funfa nos testes😓
+    const result = await sendResponse(ResponseMessage.ALL_FIELDS_MUST_BE_FILLED);
+    if (result) {
+      const { status, message } = result;
+      return res.status(status).json({ message });
+    }
+  }
+  next();
+};
+
+const checkBodyLogin = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await schemaLogin.validateAsync(req.body);
+  } catch (errorJoi:any) {
+    const err = await (errorJoi.details[0]);
+    const result = await sendResponse(err.message);
+    if (result) {
+      const { status, message } = result;
+      return res.status(status).json({ message });
+    }
+  }
+  next();
+};
 
 const checkEmail = async (req: Request, res: Response, next: NextFunction) => {
   const { email } = req.body;
@@ -22,7 +49,7 @@ const checkPassword = async (req: Request, res: Response, next: NextFunction) =>
   const user = await Users.findOne({ where: { email } });
 
   if (user) {
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, user.password); // https://www.npmjs.com/package/bcrypt
     if (!validPassword) {
       const result = await sendResponse(ResponseMessage.FAIL_LOGIN);
       if (result) {
@@ -35,4 +62,4 @@ const checkPassword = async (req: Request, res: Response, next: NextFunction) =>
   next();
 };
 
-export default { checkEmail, checkPassword };
+export default { checkEmail, checkPassword, checkBodyLogin, checkFields };

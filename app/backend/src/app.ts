@@ -1,6 +1,7 @@
 import cors = require('cors');
 import * as express from 'express';
 import loginRouter from './routers/loginRouter';
+import clubsRouter from './routers/clubsRouter';
 
 class App {
   public app: express.Express;
@@ -24,6 +25,7 @@ class App {
 
     this.app.use(accessControl);
     this.app.use('/login', loginRouter);
+    this.app.use('/clubs', clubsRouter);
     // ...
   }
 

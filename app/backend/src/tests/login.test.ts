@@ -10,7 +10,7 @@ import { Response } from 'superagent';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Rota login', () => {
+describe('Rota Login', () => {
   let chaiHttpResponse: Response;
 
   before(async () => {
@@ -23,8 +23,16 @@ describe('Rota login', () => {
   });
 
   it('Retorna o email do usuário', async () => {
-    chaiHttpResponse = await chai.request(app).post('./login').send(login);
+    chaiHttpResponse = await chai.request(app).post('/login').send(login);
     expect(chaiHttpResponse.body.user.email).to.equal(user.email);
+  });
+
+  it('Retorna os status 401 quando a senha está incorreta', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: 'admin@admin.com',
+      password: 'fail_password'
+});
+    expect(chaiHttpResponse).to.have.status(401);;
   });
   
 });

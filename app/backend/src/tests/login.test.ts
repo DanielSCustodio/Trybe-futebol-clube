@@ -27,6 +27,20 @@ describe('Rota Login', () => {
     expect(chaiHttpResponse.body.user.email).to.equal(user.email);
   });
 
+
+  it('Retorna o status 200', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send(login);
+    expect(chaiHttpResponse).to.have.status(200);
+  });
+
+
+  it('Retorna o status 200', async () => {
+    chaiHttpResponse = await chai.request(app).get('/login/validate').send(login);
+    expect(chaiHttpResponse).to.have.status(200);
+  });
+
+
+
   it('Retorna o status 401 quando a senha está incorreta', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',
@@ -41,5 +55,7 @@ describe('Rota Login', () => {
     });
     expect(chaiHttpResponse).to.have.status(401);
   });
+
+
 
 });

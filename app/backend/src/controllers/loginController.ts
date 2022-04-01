@@ -12,7 +12,7 @@ const validateLogin = async (req: Request, res: Response) => {
   const { authorization } = req.headers;
   if (authorization) {
     const role = await loginService.validateLogin(authorization);
-    res.status(StatusCode.OK).json(role);
+    return res.status(StatusCode.OK).json(role);
   }
 };
 export default { login, validateLogin };

@@ -26,4 +26,14 @@ describe('Rota matchs', () => {
     chaiHttpResponse = await chai.request(app).get('/matchs');
     expect(chaiHttpResponse).to.have.status(200);
   });
+
+  it('Retorna o status 200 de uma requisição bem sucedida para listagem para atualizar uma partida', async () => {
+    chaiHttpResponse = await chai.request(app).patch('/matchs/:id/finish');
+    expect(chaiHttpResponse).to.have.status(200);
+  });
+
+  it('Retorna o status 201 de uma requisição bem sucedida ', async () => {
+    chaiHttpResponse = await chai.request(app).post('/matchs');
+    expect(chaiHttpResponse).to.have.status(201);
+  });
 });

@@ -11,4 +11,14 @@ const getAll = async () => {
   });
   return match;
 };
-export default { getAll };
+
+const create = async (body:any) => {
+  const match = await Matchs.create(body);
+  return match;
+};
+
+const update = async (id: number) => {
+  const match = await Matchs.update({ inProgress: false }, { where: { id } });
+  return match;
+};
+export default { getAll, create, update };

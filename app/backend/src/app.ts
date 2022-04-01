@@ -1,4 +1,4 @@
-import cors = require('cors');
+import * as cors from 'cors';
 import * as express from 'express';
 import loginRouter from './routers/loginRouter';
 import clubsRouter from './routers/clubsRouter';
@@ -13,6 +13,7 @@ class App {
     this.app.use(express.json()); // Mais de 1 hora travado por causa da ordem dessas linhas 🥲
     this.app.use(cors());
     this.config();
+
     // ...
   }
 

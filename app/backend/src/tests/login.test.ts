@@ -27,12 +27,19 @@ describe('Rota Login', () => {
     expect(chaiHttpResponse.body.user.email).to.equal(user.email);
   });
 
-  it('Retorna os status 401 quando a senha está incorreta', async () => {
+  it('Retorna o status 401 quando a senha está incorreta', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',
       password: 'fail_password'
-});
-    expect(chaiHttpResponse).to.have.status(401);;
+    });
+    expect(chaiHttpResponse).to.have.status(401);
   });
-  
+
+  it('Retorna o status 401 quando a senha está ausente', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: 'admin@admin.com',
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
 });

@@ -10,7 +10,7 @@ import { Response } from 'superagent';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Rota Club', () => {
+describe('Rota clubs', () => {
   let chaiHttpResponse: Response;
 
   before(async () => {

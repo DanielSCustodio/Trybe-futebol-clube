@@ -15,7 +15,14 @@ const create = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
   const { id } = req.params;
   const match = await matchsService.update(+id);
-  res.status(StatusCode.OK).json(match);
+  return res.status(StatusCode.OK).json(match);
 };
 
-export default { getAll, create, update };
+const updateMatchLive = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { homeTeamGoals, awayTeamGoals } = req.body;
+  const match = await matchsService.updateMatchLive(+id, homeTeamGoals, awayTeamGoals);
+  return res.status(StatusCode.OK).json(match);
+};
+
+export default { getAll, create, update, updateMatchLive };

@@ -56,6 +56,13 @@ describe('Rota Login', () => {
     expect(chaiHttpResponse).to.have.status(401);
   });
 
+  it('Retorna o status 401 quando a senha e email está ausente', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+    
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
 
 
 });

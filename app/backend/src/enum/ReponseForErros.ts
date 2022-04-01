@@ -8,6 +8,7 @@ enum ResponseMessage {
   EXPIRED_OR_INVALID = 'Token expired or invalid',
   MATCH_WITH_TWO_EQUAL_TEAM = 'It is not possible to create a match with two equal teams',
   THERE_IS_NO_TEAM = 'There is no team with such id!',
+  NOT_FOUND_ID = 'Not Found id',
 }
 
 export default ResponseMessage;

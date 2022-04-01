@@ -21,4 +21,9 @@ const update = async (id: number) => {
   const match = await Matchs.update({ inProgress: false }, { where: { id } });
   return match;
 };
-export default { getAll, create, update };
+
+const updateMatchLive = async (homeTeamGoals: number, awayTeamGoals:number, id:number) => {
+  const match = await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  return match;
+};
+export default { getAll, create, update, updateMatchLive };

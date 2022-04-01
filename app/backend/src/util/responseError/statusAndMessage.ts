@@ -51,6 +51,12 @@ const statusAndMessage = [
     message: ResponseMessage.THERE_IS_NO_TEAM,
   },
 
+  {
+    status: StatusCode.UNAUTHORIZED,
+    messageReceived: ResponseMessage.NOT_FOUND_ID,
+    message: ResponseMessage.NOT_FOUND_ID,
+  },
+
 ];
 
 export default statusAndMessage;

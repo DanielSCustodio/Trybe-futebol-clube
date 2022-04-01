@@ -32,8 +32,20 @@ describe('Rota matchs', () => {
     expect(chaiHttpResponse).to.have.status(200);
   });
 
+  
+
   it('Retorna o status 201 de uma requisição bem sucedida ', async () => {
     chaiHttpResponse = await chai.request(app).post('/matchs');
     expect(chaiHttpResponse).to.have.status(201);
+  });
+
+  it('Retorna o status 401 de uma requisição mal sucedida ', async () => {
+    chaiHttpResponse = await chai.request(app).post('/matchs');
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
+  it('Retorna o status 200 de uma requisição bem sucedida ', async () => {
+    chaiHttpResponse = await chai.request(app).patch('/matchs/:id');
+    expect(chaiHttpResponse).to.have.status(200);
   });
 });

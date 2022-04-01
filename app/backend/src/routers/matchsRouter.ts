@@ -18,4 +18,10 @@ matchs.post(
 );
 
 matchs.patch('/:id/finish', matchsController.update);
+matchs.patch(
+  '/:id',
+  validationMatch.checkId,
+  matchsController.updateMatchLive,
+);
+
 export default matchs;

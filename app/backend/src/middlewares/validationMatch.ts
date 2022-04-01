@@ -56,4 +56,16 @@ const checkAwayClubExists = async (req: Request, res: Response, next: NextFuncti
 
   next();
 };
-export default { checkFields, checkClubsEquals, checkHomeClubExists, checkAwayClubExists };
+
+const checkId = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  if (!id) {
+    const result = await sendResponse(ResponseMessage.NOT_FOUND_ID);
+    if (result) {
+      const { status, message } = result;
+      return res.status(status).json({ message });
+    }
+  }
+  next();
+};
+export default { checkFields, checkClubsEquals, checkHomeClubExists, checkAwayClubExists, checkId };

@@ -68,4 +68,5 @@ const checkId = async (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 };
+
 export default { checkFields, checkClubsEquals, checkHomeClubExists, checkAwayClubExists, checkId };

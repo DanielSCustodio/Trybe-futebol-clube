@@ -1,5 +1,6 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
+// @ts-ignore
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
@@ -28,17 +29,16 @@ describe('Rota Login', () => {
   });
 
 
-  it('Retorna o status 200', async () => {
+  it('Retorna o status 200 quando o login está correto', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send(login);
     expect(chaiHttpResponse).to.have.status(200);
   });
+  
 
-
-  it('Retorna o status 200', async () => {
-    chaiHttpResponse = await chai.request(app).get('/login/validate').send(login);
+  it('Validate', async () => {
+    chaiHttpResponse = await chai.request(app).get('/login/validate');
     expect(chaiHttpResponse).to.have.status(200);
   });
-
 
 
   it('Retorna o status 401 quando a senha está incorreta', async () => {
@@ -49,9 +49,25 @@ describe('Rota Login', () => {
     expect(chaiHttpResponse).to.have.status(401);
   });
 
+  it('Retorna o status 401 quando o email está incorreto', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: 'faillogin@admin.com',
+      password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
   it('Retorna o status 401 quando a senha está ausente', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
+  it('Retorna o status 401 quando a senhanão tem mais de 6 caracteres', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: 'admin@admin.com',
+      password: '123'
     });
     expect(chaiHttpResponse).to.have.status(401);
   });

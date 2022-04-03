@@ -9,7 +9,6 @@ login.post(
   validationLogin.checkFields,
   validationLogin.checkEmail,
   validationLogin.checkPassword,
-  validationLogin.checkBodyLogin,
   loginController.login,
 );
 

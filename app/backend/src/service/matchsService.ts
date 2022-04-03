@@ -22,7 +22,7 @@ const update = async (id: number) => {
   return match;
 };
 
-const updateMatchLive = async (homeTeamGoals: number, awayTeamGoals:number, id:number) => {
+const updateMatchLive = async (id:number, homeTeamGoals: number, awayTeamGoals:number) => { // Era só a ordem dos parâmetros 😤
   const match = await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   return match;
 };

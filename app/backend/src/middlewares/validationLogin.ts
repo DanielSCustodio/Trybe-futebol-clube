@@ -3,26 +3,11 @@ import * as bcrypt from 'bcryptjs';
 import sendResponse from '../util/responseError/responseError';
 import ResponseMessage from '../enum/ReponseForErros';
 import Users from '../database/models/Users';
-import schemaLogin from '../util/schemas/schemaLogin';
 
 const checkFields = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = await req.body;
   if (!email || !password) { // Fazendo validação igual aos Incas e Astecas porque o Joi não funfa nos testes😓
     const result = await sendResponse(ResponseMessage.ALL_FIELDS_MUST_BE_FILLED);
-    if (result) {
-      const { status, message } = result;
-      return res.status(status).json({ message });
-    }
-  }
-  next();
-};
-
-const checkBodyLogin = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    await schemaLogin.validateAsync(req.body);
-  } catch (errorJoi:any) {
-    const err = await (errorJoi.details[0]);
-    const result = await sendResponse(err.message);
     if (result) {
       const { status, message } = result;
       return res.status(status).json({ message });
@@ -62,4 +47,4 @@ const checkPassword = async (req: Request, res: Response, next: NextFunction) =>
   next();
 };
 
-export default { checkEmail, checkPassword, checkBodyLogin, checkFields };
+export default { checkEmail, checkPassword, checkFields };

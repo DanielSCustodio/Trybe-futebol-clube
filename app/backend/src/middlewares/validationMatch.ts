@@ -3,11 +3,14 @@ import ResponseMessage from '../enum/ReponseForErros';
 import sendResponse from '../util/responseError/responseError';
 import Clubs from '../database/models/Clubs';
 
+console.log('passei aqui'); // 26.53%
+
 const checkFields = async (req: Request, res: Response, next: NextFunction) => {
   const { homeTeamGoals, awayTeamGoals, inProgress } = req.body;
 
   if (!homeTeamGoals || !awayTeamGoals || !inProgress) {
     const result = await sendResponse(ResponseMessage.ALL_FIELDS_MUST_BE_FILLED);
+
     if (result) {
       const { status, message } = result;
       return res.status(status).json({ message });

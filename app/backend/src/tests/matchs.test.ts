@@ -5,6 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import Matchs from '../database/models/Matchs';
+import {matchs} from './mock/matchMock';
 import { Response } from 'superagent';
 
 chai.use(chaiHttp);
@@ -15,7 +16,7 @@ describe('Rota matchs', () => {
 
   before(async () => {
     sinon.stub(Matchs, "findAll")
-      .resolves(Matchs as any);
+      .resolves(matchs as any);
   });
 
   after(() => {
@@ -32,6 +33,18 @@ describe('Rota matchs', () => {
     expect(chaiHttpResponse).to.have.status(401);
   });
 
+  it('Retorna o status 401  da requisição', async () => {
+    chaiHttpResponse = await chai.request(app).post('/matchs').send({
+      id: 1000,
+      homeTeam: 16,
+      homeTeamGoals: 1,
+      awayTeam: 8,
+      awayTeamGoals: 1,
+      inProgress: false,
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
 
   it('Retorna o status 200 de uma requisição bem sucedida quando uma partida em anadamento é atualizada', async () => {
     chaiHttpResponse = await chai.request(app).patch('/matchs/:id').send({
@@ -41,7 +54,7 @@ describe('Rota matchs', () => {
     expect(chaiHttpResponse).to.have.status(200);
   });
 
-    it('Retorna o status 200 de uma requisição bem sucedida quando uma partida em anadamento é finalizada', async () => {
+  it('Retorna o status 200 de uma requisição bem sucedida quando uma partida em anadamento é finalizada', async () => {
     chaiHttpResponse = await chai.request(app).patch('/matchs/5/finish');
     expect(chaiHttpResponse).to.have.status(200);
   });

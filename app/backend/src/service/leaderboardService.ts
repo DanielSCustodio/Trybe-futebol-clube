@@ -1,6 +1,7 @@
 import Matchs from '../database/models/Matchs';
 import Clubs from '../database/models/Clubs';
-import { clubDataCollectionHome, clubDataCollectionAway } from
+import { clubDataCollectionHome, clubDataCollectionAway,
+} from
   '../util/calculatorLeaderBoard/clubDataCollection';
 import rankingOrdering from '../util/calculatorLeaderBoard/rankingOrdering';
 
@@ -29,13 +30,35 @@ const classificationAway = async () => {
   });
 
   const getAllClubs = await Clubs.findAll();
+
   const filterAwayClub = getAllClubs.map((club) => {
     const matchAway = matchsInProgress.filter((match: any) =>
       club.clubName === match.awayClub.clubName);
     const data = clubDataCollectionAway(club.clubName, matchAway);
     return data;
   });
+
   return rankingOrdering(filterAwayClub);
 };
 
-export default { classificationHome, classificationAway };
+const classification = async () => {
+  const matchsInProgress = await Matchs.findAll({
+    where: { inProgress: false },
+    include: [{ model: Clubs, as: 'homeClub', attributes: ['clubName'] },
+      { model: Clubs, as: 'awayClub', attributes: ['clubName'] }],
+  });
+
+  const getAllClubs = await Clubs.findAll();
+
+  const filterAwayClub = getAllClubs.map((club) => {
+    const matchAway = matchsInProgress.filter((match: any) =>
+      club.id === match.homeClub);
+    const data = clubDataCollectionHome(club.clubName, matchAway);
+    return data;
+  });
+  console.log(filterAwayClub);
+
+  return rankingOrdering(filterAwayClub);
+};
+
+export default { classificationHome, classificationAway, classification };

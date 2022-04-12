@@ -4,10 +4,13 @@ import sendResponse from '../util/responseError/responseError';
 import ResponseMessage from '../enum/ReponseForErros';
 import Users from '../database/models/Users';
 
+console.log('passei aqui'); //  acessado pelo teste 88.23
+
 const checkFields = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = await req.body;
   if (!email || !password) { // Fazendo validação igual aos Incas e Astecas porque o Joi não funfa nos testes😓
     const result = await sendResponse(ResponseMessage.ALL_FIELDS_MUST_BE_FILLED);
+    console.log(result, 'testando o teste');
     if (result) {
       const { status, message } = result;
       return res.status(status).json({ message });

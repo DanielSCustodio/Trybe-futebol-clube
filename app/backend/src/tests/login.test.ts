@@ -36,7 +36,7 @@ describe('Rota Login', () => {
   
 
   it('Validate', async () => {
-    chaiHttpResponse = await chai.request(app).get('/login/validate');
+    chaiHttpResponse = await chai.request(app).get('/login/validate/');
     expect(chaiHttpResponse).to.have.status(200);
   });
 
@@ -64,6 +64,13 @@ describe('Rota Login', () => {
     expect(chaiHttpResponse).to.have.status(401);
   });
 
+  it('Retorna o status 401 quando o email está ausente', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW',
+    });
+    expect(chaiHttpResponse).to.have.status(401);
+  });
+
   it('Retorna o status 401 quando a senhanão tem mais de 6 caracteres', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',
@@ -78,6 +85,9 @@ describe('Rota Login', () => {
     });
     expect(chaiHttpResponse).to.have.status(401);
   });
+
+
+  
 
 
 

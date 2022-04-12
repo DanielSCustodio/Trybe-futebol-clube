@@ -12,4 +12,10 @@ const classificationAway = async (req: Request, res: Response) => {
   res.status(StatusCode.OK).json(result);
 };
 
-export default { classificationHome, classificationAway };
+const classification = async (req: Request, res: Response) => {
+  const result = await leaderboardService.classification();
+  console.log(result);
+
+  res.status(StatusCode.OK).json(result);
+};
+export default { classificationHome, classificationAway, classification };

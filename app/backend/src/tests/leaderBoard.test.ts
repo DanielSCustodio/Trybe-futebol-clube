@@ -1,3 +1,4 @@
+
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
@@ -27,18 +28,6 @@ describe('Rota leadBoard', () => {
     (Clubs.findAll as sinon.SinonStub).restore();
     (Clubs.findByPk as sinon.SinonStub).restore();
   })
-
-  it('Retorna o status 200 quando a requisisção é feita com sucesso', async () => {
-    chaiHttpResponse = await chai.request(app).get('/leaderboard/home/');
-    expect(chaiHttpResponse).to.have.status(200);
-    
-  });
-
-  it('Retorna o status 200 quando a requisisção é feita com sucesso', async () => {
-    chaiHttpResponse = await chai.request(app).get('/leaderboard/away/');
-    expect(chaiHttpResponse).to.have.status(200);
-  });
-
   it('Retorna o status 200 quando a requisisção é feita com sucesso', async () => {
     chaiHttpResponse = await chai.request(app).get('/leaderboard/');
     

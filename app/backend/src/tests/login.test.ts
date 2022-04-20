@@ -35,12 +35,6 @@ describe('Rota Login', () => {
   });
   
 
-  it('Validate', async () => {
-    chaiHttpResponse = await chai.request(app).get('/login/validate/');
-    expect(chaiHttpResponse).to.have.status(200);
-  });
-
-
   it('Retorna o status 401 quando a senha está incorreta', async () => {
     chaiHttpResponse = await chai.request(app).post('/login').send({
       email: 'admin@admin.com',

@@ -56,7 +56,6 @@ const classification = async () => {
     const data = clubDataCollectionHome(club.clubName, matchAway);
     return data;
   });
-  console.log(filterAwayClub);
 
   return rankingOrdering(filterAwayClub);
 };

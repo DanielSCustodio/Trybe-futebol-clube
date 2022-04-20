@@ -3,8 +3,6 @@ import ResponseMessage from '../enum/ReponseForErros';
 import sendResponse from '../util/responseError/responseError';
 import Clubs from '../database/models/Clubs';
 
-console.log('passei aqui'); // 26.53%
-
 const checkFields = async (req: Request, res: Response, next: NextFunction) => {
   const { homeTeamGoals, awayTeamGoals, inProgress } = req.body;
 

@@ -14,7 +14,6 @@ const classificationAway = async (req: Request, res: Response) => {
 
 const classification = async (req: Request, res: Response) => {
   const result = await leaderboardService.classification();
-  console.log(result);
 
   res.status(StatusCode.OK).json(result);
 };

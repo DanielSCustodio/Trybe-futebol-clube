@@ -1,6 +1,5 @@
 const rankingOrdering = (classification:any) =>
   classification.sort((a:any, b:any):any => {
-    console.log('================>', classification);
     if (a.totalPoints < b.totalPoints) return 1;
     if (a.totalPoints > b.totalPoints) return -1;
     if (a.totalVictories < b.totalVictories) return 1;

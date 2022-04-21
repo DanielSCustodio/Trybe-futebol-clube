@@ -11,7 +11,7 @@ Um site que para acompanhar e gerenciar partidas de futebol, permitindo: criar, 
 * Criação de CRUD utilizando ORM
 * Testes de integração
 
-## Técnologias usadas
+## Tecnologias usadas
 
 Front-end:
 > Desenvolvido utilizando: React, CSS3, HTML5 (Desenvolvido pela Trybe)

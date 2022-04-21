@@ -1,4 +1,5 @@
 # Trybe Futebol Clube ⚽️
+![front-example](https://user-images.githubusercontent.com/29557187/164346561-d1bda15e-dfd9-48ae-aed5-f96c2c930f11.png)
 
 # Contexto
 Um site que para acompanhar e gerenciar partidas de futebol, permitindo: criar, editar, deletar e obter a classificação dos líderes.

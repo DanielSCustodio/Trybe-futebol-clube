@@ -1,4 +1,4 @@
-# Trybe Futebol Clube ⚽️
+# Trybe Futebol Clube 
 ![front-example](https://user-images.githubusercontent.com/29557187/164346561-d1bda15e-dfd9-48ae-aed5-f96c2c930f11.png)
 
 # Contexto
